@@ -13,11 +13,17 @@ class Matrix
   def build!
     @storage = []
 
+    numeric = 1
+
+    # For each row
     rows.times do |row|
       row_data = []
 
+      # Build the row data
       columns.times do |column|
-        row_data[column] = 1
+        row_data[column] = numeric
+
+        numeric += 1
       end
 
       @storage[row] = row_data

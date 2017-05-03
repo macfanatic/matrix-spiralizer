@@ -24,6 +24,12 @@ RSpec.describe Matrix, type: :model do
       it 'has 10 items in each row' do
         expect(subject).to be_all { |row| row.size == 10 }
       end
+
+      it 'starts each row with the correct digit' do
+        subject.each do |row|
+          expect(row[0] % 10).to eq(1)
+        end
+      end
     end
 
     context '2x10' do
@@ -37,6 +43,12 @@ RSpec.describe Matrix, type: :model do
       it 'has 10 items in each row' do
         expect(subject).to be_all { |row| row.size == 10 }
       end
+
+      it 'starts each row with the correct digit' do
+        subject.each do |row|
+          expect(row[0] % 10).to eq(1)
+        end
+      end
     end
 
     context '10x1' do
@@ -49,6 +61,12 @@ RSpec.describe Matrix, type: :model do
 
       it 'has 1 item in each row' do
         expect(subject).to be_all { |row| row.size == 1 }
+      end
+
+      it 'starts each row with the correct digit' do
+        subject.each_with_index do |row, index|
+          expect(row[0]).to eq(index + 1)
+        end
       end
     end
   end
