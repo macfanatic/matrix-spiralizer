@@ -59,7 +59,7 @@ module Matrices
         end
 
         # Begin moving down from the end of this row
-        starts_at = IndexPath[origin.row + 1, stop.column]
+        starts_at = IndexPath[stop.row + 1, stop.column]
         ends_at = IndexPath[max_rows - origin.row, stop.column]
 
         results.concat down!(starts_at, ends_at)
@@ -70,6 +70,15 @@ module Matrices
     #
     # Will begin moving up from beginning of this row
     def left!(origin, stop)
+      y = origin.column
+
+      [].tap do |results|
+        while y >= stop.column
+          results << extract!(IndexPath[origin.row, y])
+
+          y -= 1
+        end
+      end
     end
 
     # Moves from origin until the indicated stop point
@@ -90,6 +99,12 @@ module Matrices
 
           x += 1
         end
+
+        # Begin moving left from the end of this row
+        starts_at = IndexPath[stop.row, stop.column - 1]
+        ends_at = IndexPath[stop.row, max_columns - stop.row]
+
+        results.concat left!(starts_at, ends_at)
       end
     end
   end
