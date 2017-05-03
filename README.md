@@ -29,7 +29,7 @@ $> bin/console
 At the command line:
 
 ```shell
-$>
+$> bin/matrix 2 4
 ```
 
 ## Testing
