@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+require_relative '../config/boot'
+
+# Start an actual terminal
+require "irb"
+IRB.start

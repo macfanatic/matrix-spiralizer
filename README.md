@@ -17,6 +17,15 @@ $> bundle install
 
 ## Usage
 
+### Console
+To play with an interactive console and inspect the code as you wish:
+
+```shell
+$> bin/console
+```
+
+### CLI
+
 At the command line:
 
 ```shell
