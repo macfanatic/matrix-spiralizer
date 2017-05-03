@@ -4,14 +4,22 @@ module Matrices
   class Spiralize
     include Performable
 
+    AlreadyExtracted = Class.new(StandardError)
+
     # returns a sequence of numeric values from the matrix
     # in a spiral order (working from origin an 0,0 around to the center of the matrix)
     def perform(matrix)
       @matrix = matrix
       @recorded_indices = []
 
+      # Begin by navigating to the right from the origin
+      # Each method (right, left, down, up) calls the next direction change
+      # An exception is raised when we're finished (out of bounds or already attempted that cell)
       [].tap do |results|
-        results.concat right(IndexPath[0,0], IndexPath[0, matrix.columns])
+        begin
+          results.concat right(IndexPath[0,0], IndexPath[0, matrix.columns])
+        rescue AlreadyExtracted, Matrix::IndexPathOutOfBounds
+        end
       end
     end
 
@@ -19,8 +27,9 @@ module Matrices
 
     # Pulls value from index and records that index as used
     def extract!(index)
-      @recorded_indices << index
+      raise AlreadyExtracted if extracted?(index)
 
+      @recorded_indices << index
       @matrix[index]
     end
 
