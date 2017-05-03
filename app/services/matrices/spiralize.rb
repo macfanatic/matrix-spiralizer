@@ -4,15 +4,28 @@ module Matrices
   class Spiralize
     include Performable
 
-    # returns a space separate sequence of numeric values from the matrix
+    # returns a sequence of numeric values from the matrix
     # in a spiral order (working from origin an 0,0 around to the center of the matrix)
     def perform(matrix)
-      matrix.storage.flatten
+      @matrix = matrix
+
+      [].tap do |results|
+        results.concat right(IndexPath[0,0], IndexPath[0, matrix.columns])
+      end
     end
 
     private
 
     def right(origin, stop)
+      y = origin.column
+
+      [].tap do |results|
+        while y < stop.column
+          results << @matrix[IndexPath[origin.row, y]]
+
+          y += 1
+        end
+      end
     end
 
     def left(origin, stop)
