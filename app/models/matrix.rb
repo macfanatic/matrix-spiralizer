@@ -4,6 +4,7 @@ class Matrix
   def initialize(rows, columns)
     @rows = rows
     @columns = columns
+    @storage = []
 
     build!
   end
@@ -11,22 +12,18 @@ class Matrix
   private
 
   def build!
-    @storage = []
-
-    numeric = 1
-
-    # For each row
     rows.times do |row|
-      row_data = []
+      @storage[row] = build_row(row, columns * row)
+    end
+  end
 
-      # Build the row data
+  def build_row(row, numeric)
+    [].tap do |row_data|
       columns.times do |column|
-        row_data[column] = numeric
-
         numeric += 1
-      end
 
-      @storage[row] = row_data
+        row_data[column] = numeric
+      end
     end
   end
 end
