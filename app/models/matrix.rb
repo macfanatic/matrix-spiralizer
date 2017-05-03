@@ -12,7 +12,7 @@ class Matrix
   end
 
   def [](index_path)
-    raise IndexPathOutOfBounds if index_path.row >= rows || index_path.column >= columns
+    raise IndexPathOutOfBounds.new(index_path.inspect) if index_path.row >= rows || index_path.column >= columns
 
     @storage[index_path.row][index_path.column]
   end
