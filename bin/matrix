@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+require_relative '../config/boot'
+
+def error!
+  $stderr.puts "Usage: bin/matrix NUM_ROWS NUM_COLS"
+  exit(1)
+end
+
+# Ensure correct number of arguments provided
+error! unless ARGV.size == 2
+
+# Ensure positive integers
+NUM_ROWS = ARGV[0].to_i.freeze
+NUM_COLS = ARGV[1].to_i.freeze
+error! if NUM_ROWS <= 0 || NUM_COLS <= 0
+
+# Create matrix and print spiralized version
+matrix = Matrix.new(NUM_ROWS, NUM_COLS)
+spiral = Matrices::Spiralize.perform(matrix)
+
+$stdout.puts spiral.join(' ')
