@@ -6,3 +6,8 @@ app_directories = Pathname.new(app_dir).children.select(&:directory?)
 app_directories.each do |dir|
   $LOAD_PATH.unshift(dir) unless $LOAD_PATH.include?(dir)
 end
+
+ENV['APP_ENV'] ||= 'development'
+
+require 'bundler/setup'
+Bundler.require(:default, ENV['APP_ENV'])
