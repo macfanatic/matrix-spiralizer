@@ -78,6 +78,12 @@ module Matrices
 
           y -= 1
         end
+
+        # Begin moving up from the start of this row
+        starts_at = IndexPath[stop.row - 1, stop.column]
+        ends_at = IndexPath[max_rows - origin.row + 1, stop.column]
+
+        results.concat up!(starts_at, ends_at)
       end
     end
 
@@ -85,6 +91,15 @@ module Matrices
     #
     # Will begin moving right from top of this column
     def up!(origin, stop)
+      x = origin.row
+
+      [].tap do |results|
+        while x >= stop.row
+          results << @matrix[IndexPath[x, origin.column]]
+
+          x -= 1
+        end
+      end
     end
 
     # Moves from origin until the indicated stop point
