@@ -1,6 +1,22 @@
 require 'spec_helper'
 
 RSpec.describe Matrix, type: :model do
+  describe '.[]' do
+    subject { described_class.new(2, 2) }
+
+    it 'returns the origin' do
+      expect(subject[IndexPath[0,0]]).to eq(1)
+    end
+
+    it 'returns the last value (bottom right)' do
+      expect(subject[IndexPath[1,1]]).to eq(4)
+    end
+
+    it 'raises error for invalid path' do
+      expect { subject[IndexPath[10,10]] }.to raise_error(Matrix::IndexPathOutOfBounds)
+    end
+  end
+
   describe '.storage' do
     subject { described_class.new(rows, columns).storage }
 
