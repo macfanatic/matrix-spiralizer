@@ -2,4 +2,6 @@ source 'https://rubygems.org'
 
 ruby IO.read('.rubyversion')
 
-gem 'rspec', '~> 3.5'
+group :test do
+  gem 'rspec', '~> 3.5'
+end
