@@ -8,6 +8,7 @@ module Matrices
     # in a spiral order (working from origin an 0,0 around to the center of the matrix)
     def perform(matrix)
       @matrix = matrix
+      @recorded_indices = []
 
       [].tap do |results|
         results.concat right(IndexPath[0,0], IndexPath[0, matrix.columns])
@@ -16,12 +17,23 @@ module Matrices
 
     private
 
+    # Pulls value from index and records that index as used
+    def extract!(index)
+      @recorded_indices << index
+
+      @matrix[index]
+    end
+
+    def extracted?(index)
+      @recorded_indices.include?(index)
+    end
+
     def right(origin, stop)
       y = origin.column
 
       [].tap do |results|
         while y < stop.column
-          results << @matrix[IndexPath[origin.row, y]]
+          results << extract!(IndexPath[origin.row, y])
 
           y += 1
         end
