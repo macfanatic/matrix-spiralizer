@@ -67,7 +67,7 @@ module Matrices
 
       # Begin moving down from the end of this row
       starts_at = IndexPath[stop.row + 1, stop.column]
-      ends_at = IndexPath[max_rows - origin.row, stop.column]
+      ends_at = IndexPath[max_rows - stop.row, stop.column]
 
       down!(starts_at, ends_at)
     end
@@ -124,7 +124,7 @@ module Matrices
 
       # Begin moving left from the end of this row
       starts_at = IndexPath[stop.row, stop.column - 1]
-      ends_at = IndexPath[stop.row, max_columns - stop.row ]
+      ends_at = IndexPath[stop.row, max_columns - stop.column]
 
       left!(starts_at, ends_at)
     end

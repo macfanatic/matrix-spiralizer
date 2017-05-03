@@ -16,7 +16,7 @@ You can at most safely create a matrix of `2M x 2M` if you had 6GB of memory ava
 I like the separation of responsibilities and test coverage being easy to understand.  I like the familiarity of the file structure resembling a "real" application, with a console playground as well.
 
 4. What is not good about your solution?
-Memory usage could be improved with other means as mentioned above in limiting factors, and implementation does not currently work on a 2x4 matrix :(
+Memory usage could be improved with other means as mentioned above in limiting factors.
 
 ## Installation
 

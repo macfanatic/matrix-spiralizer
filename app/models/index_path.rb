@@ -16,6 +16,10 @@ class IndexPath
     end
   end
 
+  def ==(other)
+    other.row == row && other.column == column
+  end
+
   def row=(r)
     raise IndexOutOfBounds.new(r) if r < 0
 
