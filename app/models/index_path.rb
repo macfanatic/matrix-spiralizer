@@ -1,5 +1,7 @@
 class IndexPath
-  attr_accessor :row, :column
+  attr_reader :row, :column
+
+  IndexOutOfBounds = Class.new(StandardError)
 
   # Class methods
   class << self
@@ -12,5 +14,17 @@ class IndexPath
         path.column = column
       end
     end
+  end
+
+  def row=(r)
+    raise IndexOutOfBounds.new(r) if r < 0
+
+    @row = r
+  end
+
+  def column=(c)
+    raise IndexOutOfBounds.new(c) if c < 0
+
+    @column = c
   end
 end
